@@ -1,7 +1,6 @@
 // Update with your config settings.
 
 module.exports = {
-
   development: {
     client: 'sqlite3',
     connection: {
@@ -14,8 +13,14 @@ module.exports = {
     },
     seeds: {
       directory: './database/seeds'
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        // runs after a connection is made to the sqlite engine
+        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
+      }
     }
-  },
+  }
 
   // staging: {
   //   client: 'postgresql',
@@ -48,5 +53,4 @@ module.exports = {
   //     tableName: 'knex_migrations'
   //   }
   // }
-
 };
