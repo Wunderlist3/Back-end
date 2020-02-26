@@ -29,9 +29,9 @@ exports.up = function(knex) {
           .references('users.id')
           .onUpdate('CASCADE')
           .onDelete('CASCADE');
-        
+
         todos.string('notes', 256);
-        
+
         todos
           .boolean('completed')
           .notNullable()
@@ -40,4 +40,6 @@ exports.up = function(knex) {
   );
 };
 
-exports.down = function(knex) {};
+exports.down = function(knex) {
+  return knex.schema.dropTableIfExists('users').dropTableIfExists('todos');
+};
