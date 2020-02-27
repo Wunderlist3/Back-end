@@ -4,8 +4,10 @@ const Todos = require('../models/todos-model.js');
 
 const authenticate = require('../middleware/auth-middleware.js');
 
+const requireTodo = require('../middleware/requireTodo-middleware.js');
+
 // ADD TODO
-router.post('/add', authenticate, (req, res) => {
+router.post('/add', authenticate, requireTodo, (req, res) => {
   const todo = req.body;
 
   Todos.addTodo(todo)
@@ -76,8 +78,9 @@ router.delete('/delete/:id', authenticate, async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      error: 'Failed to delete todo', err
-    })
+      error: 'Failed to delete todo',
+      err
+    });
   }
 });
 
