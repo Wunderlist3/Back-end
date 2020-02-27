@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 const authRouter = require('../routers/auth-router.js');
 const todosRouter = require('../routers/todos-router.js');
+const usersRouter = require('../routers/users-router.js');
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.use(cors());
 
 server.use('/api/auth', authRouter);
 server.use('/api/todos', todosRouter)
+server.use('/api/users', usersRouter)
 
 server.get('/', (req, res) => {
   res.status(200).json({ api: 'up' });
