@@ -12,14 +12,16 @@ router.post('/register', (req, res) => {
   const hash = bcrypt.hashSync(user.password, 12);
   user.password = hash;
 
-  Users.add(user)
-    .then(saved => {
-      res.status(201).json(saved);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: 'User registration failed', err });
-    });
+  user.username && user.password
+    ? Users.add(user)
+        .then(saved => {
+          res.status(201).json(saved);
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({ error: 'User registration failed', err });
+        })
+    : res.status(400).json({ message: 'Username and password required' });
 });
 
 // POST LOGIN USER

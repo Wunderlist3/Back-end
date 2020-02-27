@@ -18,7 +18,7 @@ server.use('/api/auth', authRouter);
 server.use('/api/todos', todosRouter)
 server.use('/api/users', usersRouter)
 
-server.get('/', (req, res) => {
+server.get('/api', (req, res) => {
   res.status(200).json({ api: 'up' });
 });
 
