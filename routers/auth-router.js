@@ -50,12 +50,12 @@ router.post('/login', (req, res) => {
 
 function genJwtToken(user) {
   const payload = {
-    userid: user.id,
+    id: user.id,
     username: user.username
   };
 
   const options = {
-    expiresIn: '8h'
+    expiresIn: '1d'
   };
 
   const token = jwt.sign(payload, secrets.jwtSecret, options);
