@@ -6,6 +6,7 @@ const Users = require('../models/auth-model.js');
 
 const secrets = require('../config/secrets.js');
 
+// POST REGISTER USER
 router.post('/register', (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 12);
@@ -21,6 +22,7 @@ router.post('/register', (req, res) => {
     });
 });
 
+// POST LOGIN USER
 router.post('/login', (req, res) => {
   let { username, password } = req.body;
 

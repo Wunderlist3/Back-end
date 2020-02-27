@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Users = require('../models/users-model.js');
 
+// GET ALL USERS
 router.get('/', (req, res) => {
   Users.find()
     .then(users => {
@@ -13,6 +14,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET USER BY ID
 router.get('/:id', async (req, res) => {
   try {
     const user = await Users.findUser(req.params.id);
