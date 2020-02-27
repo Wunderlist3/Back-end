@@ -1,7 +1,7 @@
 const db = require('../database/dbConfig.js');
 
 async function addTodo(todo) {
-  const [id] = await db('todos').insert(todo);
+  const [id] = await db('todos').insert(todo).returning('id');
 
   return findTodo(id);
 }

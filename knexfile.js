@@ -1,5 +1,7 @@
 // Update with your config settings.
 
+require('dotenv').config();
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -20,7 +22,7 @@ module.exports = {
         conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
       }
     }
-  }
+  },
 
   // staging: {
   //   client: 'postgresql',
@@ -38,19 +40,15 @@ module.exports = {
   //   }
   // },
 
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
+  production: {
+    client: 'pg',
+    connection: process.env.DB_URL,
+    migrations: {
+      directory: './database/migrations',
+      tableName: 'dbmigrations'
+    },
+    seeds: {
+      directory: './database/seeds'
+    }
+  }
 };
