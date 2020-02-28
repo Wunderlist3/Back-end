@@ -4,28 +4,29 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('../models/auth-model.js');
 
+const requireRegister = require('../middleware/requireUser-middleware.js');
+
 const secrets = require('../config/secrets.js');
 
 // POST REGISTER USER
-router.post('/register', (req, res) => {
+router.post('/register', requireRegister, (req, res) => {
   let user = req.body;
-  const hash = bcrypt.hashSync(user.password, 12);
+  const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
+  console.log('user', user);
 
-  user.username && user.password
-    ? Users.add(user)
-        .then(saved => {
-          res.status(201).json(saved);
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json({ error: 'User registration failed', err });
-        })
-    : res.status(400).json({ message: 'Username and password required' });
+  Users.add(user)
+    .then(saved => {
+      res.status(201).json(saved);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: 'User registration failed', err });
+    });
 });
 
 // POST LOGIN USER
-router.post('/login', (req, res) => {
+router.post('/login', requireRegister, (req, res) => {
   let { username, password } = req.body;
 
   Users.findBy({ username })
