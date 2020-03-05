@@ -111,3 +111,6 @@ dist
 
 # dotenv
 .env
+
+# SQLite DBs
+*.db3
