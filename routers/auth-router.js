@@ -13,7 +13,7 @@ router.post('/register', requireRegister, (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
-  console.log('user', user);
+  // console.log('user', user);
 
   Users.add(user)
     .then(saved => {
