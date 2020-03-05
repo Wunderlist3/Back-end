@@ -79,7 +79,7 @@ router.put('/update/:id', authenticate, async (req, res) => {
 router.delete('/delete/:id', authenticate, async (req, res) => {
   try {
     const count = await Todos.removeTodo(req.params.id);
-    console.log('count', count);
+    // console.log('count', count);
     if (count > 0) {
       res.status(200).json({ message: 'Todo deleted' });
     } else {
