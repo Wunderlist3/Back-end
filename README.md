@@ -1,6 +1,6 @@
 # Back-end
 
-Back-end devs will work out of here. Make sure you create a separate branch.
+WunderList 3.0 Backend
 
 ## Base API
 
